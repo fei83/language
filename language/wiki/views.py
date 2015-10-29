@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from wiki.models import Category, Page
+from wiki.forms import CategoryForm
 
 
 def wiki(request):  
@@ -13,7 +14,6 @@ def about(request):
 
 
 def category(request, categoryNameSlug):
-    print('here')
     context = {}
     try:
         category = Category.objects.get(slug=categoryNameSlug)
@@ -24,3 +24,14 @@ def category(request, categoryNameSlug):
         context['categoryName'] = categoryNameSlug.replace('-', ' ')
     return render(request, 'wiki/category.html', context)
 
+
+def addCategory(request):
+    template = 'wiki/addCategory.html'
+    if request.method=='GET':
+        return render(request, template, {'form':CategoryForm()})
+    # request.method=='POST'
+    form = CategoryForm(request.POST)
+    if not form.is_valid():
+        return render(request, template, {'form':form})
+    form.save(commit=True)
+    return wiki(request)    # Call function wiki()
