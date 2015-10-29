@@ -2,14 +2,14 @@
 {% load staticfiles %}
 <html>
 <head>
-<title>Tango with Django</title>
+<title>程式語言小百科</title>
 <meta charset=utf-8>
 <link rel=stylesheet href={% static 'main/css/main.css' %}>
 </head>
 <body>
 
 <h1>新增一個程式語言類別</h1>
-<form id=categoryForm method=post action=/rango/addCategory/>
+<form id=categoryForm method=post action=/wiki/addCategory/>
   {% csrf_token %}
   {{form.as_p}}
   <input type=submit value='送出'>

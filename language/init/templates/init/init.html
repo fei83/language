@@ -7,7 +7,8 @@
 <link rel=stylesheet href="{% static 'main/css/main.css' %}">
 </head>
 <body>
-{% if noInit %}
+
+{% if not init %}
 <h1>系統並未初始化，目前資料如下：</h1>
 {% else %}
 <h1>輸入資料如下：</h1>
@@ -23,21 +24,6 @@
 <li>是管理者：{{user.is_superuser}}</li>
 {% endfor %}
 </ul>
-<!-- 
-<p><b>程式類別：</b></p>
-<ul>
-{% for category in categories %}
-  <li>{{category.name}}(瀏覽：{{category.views}}, 讚：{{category.likes}}，Slug：{{category.slug}})</li>
-{% endfor %}
-</ul>
-<p><b>頁面：</b></p>
-<table>
-  <tr><th>標題</th><th>所屬類別</th><th>網址</th></tr>
-  {% for page in pages %}
-    <tr><td>{{page.title}}</td><td>{{page.category.name}}</td><td>{{page.url}}</td></tr>
-  {% endfor %}
-</table>
--->
 
 <p><b>程式類別與頁面：</b></p>
 <ul>
@@ -55,7 +41,7 @@
     {% endfor %}
   {% endfor %}
 </ul>
-  
+
 <br>
 <p><a href="{% url 'main:main' %}">回首頁</a></p>
 </body>

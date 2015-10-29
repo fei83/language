@@ -7,9 +7,9 @@ from wiki.models import Category, Page
  
 def init(request):
     if User.objects.filter(username='admin'):
-        context = {'noInit':True}
+        context = {'init':False}
     else:
-        context = {'noInit':False}
+        context = {'init':True}
 
         # Delete everything
         User.objects.all().delete()
@@ -85,9 +85,10 @@ def init(request):
 
 
 def popCategory(name):
-    category = Category.objects.get_or_create(name=name,
-                                              views=random.randint(0,20),
-                                              likes=random.randint(0,20))[0]
+    category = Category.objects.get_or_create(name=name)[0]
+    category.views = random.randint(0,20)
+    category.likes = random.randint(0,20)
+    category.save()
     return category
 
 
