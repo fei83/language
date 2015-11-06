@@ -4,8 +4,8 @@ from wiki.forms import CategoryForm
 
 
 def wiki(request):  
-    #categories = Category.objects.order_by('-likes')        
-    context = {}
+    categories = Category.objects.order_by('-likes')
+    context = {'categories':categories}
     return render(request, 'wiki/wiki.html', context)
 
 
