@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from django.template.defaultfilters import slugify
 
@@ -10,6 +11,8 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        if not self.slug:
+            self.slug = self.name.replace(' ', '-')
         super(Category, self).save(*args, **kwargs)
 
     def __str__(self):
